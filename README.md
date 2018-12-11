@@ -32,8 +32,6 @@ After npm building the project, go to project root directory, open shell and run
 docker build -t express-es6-starter .
 ```
 
-Instructions about running the container are available [here](https://hub.docker.com/r/tomyitav/express-es6-starter/)
-
 ## Debugging with Webstorm
 
 Set babel-node executable as the node interpreter.
