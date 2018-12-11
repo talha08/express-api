@@ -38,7 +38,7 @@ CarsModel.addCar = carObject => {
 }
 
 CarsModel.updateCar = (carId, carObject) => {
-  let car = this.findById(carID)
+  let car = CarsModel.findById(carId)
   return car.update(carObject)
 }
 

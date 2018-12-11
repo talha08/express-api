@@ -33,7 +33,7 @@ controller.addCar = async (req, res) => {
 controller.updareCar = async (req, res) => {
   try {
     let carID = req.params.id
-    const updateCar = await Car.updateCar(carID)
+    const updateCar = await Car.updateCar(carID, req.query)
     logger.info("Updated Car- " + updateCar)
     res.send("Car successfully Updated")
   } catch (err) {
@@ -43,9 +43,9 @@ controller.updareCar = async (req, res) => {
 }
 
 controller.deleteCar = async (req, res) => {
-  let carID = req.params.id
   try {
-    const removedCar = await Car.removeCar(carID, req.query)
+    let carID = req.params.id
+    const removedCar = await Car.removeCar(carID)
     logger.info("Deleted Car- " + removedCar)
     res.send("Car successfully deleted")
   } catch (err) {
