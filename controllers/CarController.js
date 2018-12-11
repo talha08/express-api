@@ -1,4 +1,4 @@
-import Car from "../models/cars.model"
+import Car from "../models/Car"
 import logger from "../core/logger/app-logger"
 
 const controller = {}
@@ -16,7 +16,9 @@ controller.getAll = async (req, res) => {
 
 controller.addCar = async (req, res) => {
   let carToAdd = Car({
-    name: req.body.name
+    name: req.body.name,
+    brand: req.body.brand,
+    year: req.body.year
   })
   try {
     const savedCar = await Car.addCar(carToAdd)
@@ -28,10 +30,22 @@ controller.addCar = async (req, res) => {
   }
 }
 
-controller.deleteCar = async (req, res) => {
-  let carName = req.body.name
+controller.updareCar = async (req, res) => {
   try {
-    const removedCar = await Car.removeCar(carName)
+    let carID = req.params.id
+    const updateCar = await Car.updateCar(carID)
+    logger.info("Updated Car- " + updateCar)
+    res.send("Car successfully Updated")
+  } catch (err) {
+    logger.error("Failed to Update car- " + err)
+    res.send("Update failed..!")
+  }
+}
+
+controller.deleteCar = async (req, res) => {
+  let carID = req.params.id
+  try {
+    const removedCar = await Car.removeCar(carID, req.query)
     logger.info("Deleted Car- " + removedCar)
     res.send("Car successfully deleted")
   } catch (err) {
